@@ -116,6 +116,31 @@ Sebuah kerajaan besar di Indonesia sedang mengalami pertempuran dengan penjajah.
 ## 1
 > Untuk mempersiapkan peperangan World War MMXXIV (Iya sebanyak itu), Sriwijaya membuat dua kotanya menjadi web server yaitu Tanjungkulai, dan Bedahulu, serta Sriwijaya sendiri akan menjadi DNS Master. Kemudian karena merasa terdesak, Majapahit memberikan bantuan dan menjadikan kerajaannya (Majapahit) menjadi DNS Slave.
 
+Langkah pertama, cek nameserver yang digunakan oleh node Nusantara dengan command berikut:
+```
+cat /etc/resolv.conf
+```
+Hasilnya akan menunjukkan bahwa nameserver yang digunakan adalah `192.168.122.1`. Selanjutnya, pada node lain (selain Nusantara), edit file `/root/.bashrc` menggunakan command berikut:
+
+```
+nano /root/.bashrc
+```
+Lalu tambahkan baris ini di bagian paling bawah:
+```
+echo 'nameserver 192.168.122.1' > /etc/resolv.conf
+```
+
+Untuk node Sriwijaya, jalankan command berikut untuk menginstal `bind9` karena Sriwijaya menjadi DNS Master:
+```
+apt-get install bind9 -y
+```
+
+Sedangkan, pada node Nusantara, gunakan command berikut untuk melakukan NAT:
+```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.236.0.0/16
+```
+
+Setelah itu, restart seluruh node dan memastikan untuk melakukan tes koneksi (PING) dari setiap node untuk memastikan jaringan berfungsi dengan benar.
 ### Result
 ![image](https://github.com/user-attachments/assets/794c0c53-ebbc-4c87-8c7b-e4eea0325fe4)
 ![image](https://github.com/user-attachments/assets/52c19f62-4b30-48ab-8af0-c467d2a44752)
