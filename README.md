@@ -187,11 +187,11 @@ Setelah itu, restart seluruh node dan memastikan untuk melakukan tes koneksi (PI
 
 ## 15
 > Markas pusat meminta laporan hasil benchmark dengan menggunakan apache benchmark dari load balancer dengan 2 web server yang berbeda tersebut dan meminta secara detail dengan ketentuan:
-- Nama Algoritma Load Balancer
-- Report hasil testing apache benchmark 
-- Grafik request per second untuk masing masing algoritma. 
-- Analisis
-- Meme terbaik kalian (terserah ( ͡° ͜ʖ ͡°)) 🤓
+> - Nama Algoritma Load Balancer
+> - Report hasil testing apache benchmark 
+> - Grafik request per second untuk masing masing algoritma. 
+> - Analisis
+> - Meme terbaik kalian (terserah ( ͡° ͜ʖ ͡°)) 🤓
 
 ## 16
 > Karena dirasa kurang aman dari brainrot karena masih memakai IP, markas ingin akses ke Solok memakai solok.xxxx.com dengan alias www.solok.xxxx.com (sesuai web server terbaik hasil analisis kalian).
