@@ -137,7 +137,7 @@ apt-get install bind9 -y
 
 Sedangkan, pada node Nusantara, gunakan command berikut untuk melakukan NAT:
 ```
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.236.0.0/16
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.239.0.0/16
 ```
 
 Setelah itu, restart seluruh node dan memastikan untuk melakukan tes koneksi (PING) dari setiap node untuk memastikan jaringan berfungsi dengan benar.
