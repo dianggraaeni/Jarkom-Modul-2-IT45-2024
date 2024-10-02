@@ -5,6 +5,9 @@
 | Dian Anggraeni Putri         | 5027231016 |
 | ⁠Abhirama Triadyatma Hermawan | 5027231061 |
 
+## Topology
+![image](https://github.com/user-attachments/assets/163045b3-3076-4907-87c0-0d0daec2d9b0)
+
 ## Configuration
 
 * Nusantara
