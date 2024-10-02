@@ -335,6 +335,32 @@ ping rujapala.it45.com
 ## 5
 > Pastikan domain-domain tersebut dapat diakses oleh seluruh komputer (client) yang berada di Nusantara.
 
+Kita akan melakukan pengujian konektivitas dengan mengirimkan PING ke server `sudarsana.it45.com`, `pasopati.it45.com`, dan `rujapala.it45.com` dari klien Mulawarman, GrahamBell, Samaratungga, dan Srikandi. Kita dapat memverifikasi apakah koneksi ke server-server tersebut berfungsi dengan baik dengan mengimplementasikan command-command berikut: (agar hasilnya tidak menampilkan sangat banyak, maka bisa diambil sampel dengan memakai -c 2)
+
+```
+ping -c 2 sudarsana.it45.com
+```
+
+```
+ping -c 2 pasopati.it45.com
+```
+
+```
+ping -c 2 rujapala.it45.com
+```
+
+### Result (Mulawarman)
+![image](https://github.com/user-attachments/assets/9b726553-ca87-4f2c-9468-86cf2d97793f)
+
+### Result (GrahamBell)
+![image](https://github.com/user-attachments/assets/94d4aacd-1e2f-4623-91b3-0a2c06c3c63c)
+
+### Result (Samaratungga)
+![image](https://github.com/user-attachments/assets/191757ee-0602-4324-b6f3-5ef3679e19d8)
+
+### Result (Srikandi)
+![image](https://github.com/user-attachments/assets/fb6d7b11-1db6-4773-8970-9642e3a8b732)
+
 ## 6
 > Beberapa daerah memiliki keterbatasan yang menyebabkan hanya dapat mengakses domain secara langsung melalui alamat IP domain tersebut. Karena daerah tersebut tidak diketahui secara spesifik, pastikan semua komputer (client) dapat mengakses domain pasopati.xxxx.com melalui alamat IP Kotalingga (Notes: menggunakan pointer record).
 
