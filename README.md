@@ -207,7 +207,7 @@ Simpan dan keluar dari editor. Selanjutnya, ubah file `soal2` menjadi executable
 chmod +x ./soal2
 ```
 
-Terakhir, coba lakukan tes PING ke domain tersebut dari node Sriwijaya dengan command:
+Terakhir, tes PING ke domain tersebut dari node Sriwijaya dengan command:
 ```
 ping sudarsana.it45.com
 ```
@@ -215,9 +215,67 @@ ping sudarsana.it45.com
 ### Result
 ![image](https://github.com/user-attachments/assets/bd5a21a0-947c-4417-962c-8cc85be18550)
 
-
 ## 3
 > Para pasukan juga perlu mengetahui mana titik yang akan diserang, sehingga dibutuhkan domain lain yaitu pasopati.xxxx.com dengan alias www.pasopati.xxxx.com yang mengarah ke Kotalingga.
+
+Buat file baru dengan misal namanya `soal3` menggunakan command berikut:
+```
+nano soal3
+```
+
+Kemudian, masukkan skrip berikut ke dalam file tersebut:
+
+```
+#!/bin/bash
+
+# Menambahkan zona ke konfigurasi BIND
+echo 'zone "pasopati.it45.com" {
+	type master;
+	file "/etc/bind/jarkom/pasopati.it45.com";
+};' > /etc/bind/named.conf.local
+
+# Membuat direktori jika belum ada
+mkdir -p /etc/bind/jarkom
+
+# Template file DNS
+cp /etc/bind/db.local /etc/bind/jarkom/pasopati.it45.com
+
+# Mengatur file zona
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     pasopati.it45.com. pasopati.it45.com. (
+                        2024100301      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      pasopati.it45.com.
+@       IN      A       192.239.2.4     ; IP Kotalingga
+www     IN      CNAME   pasopati.it45.com.' > /etc/bind/jarkom/pasopati.it45.com
+
+# Memeriksa konfigurasi BIND
+named-checkconf
+
+# Restart layanan BIND9
+service bind9 restart
+```
+
+Simpan dan keluar dari editor. Selanjutnya, ubah file `soal3` menjadi executable dengan menjalankan:
+```
+chmod +x ./soal3
+```
+
+Terakhir, coba lakukan tes PING ke domain tersebut dari node Sriwijaya dengan command:
+```
+ping pasopati.it45.com
+```
+
+### Result
+![image](https://github.com/user-attachments/assets/151cb6af-d73c-47da-9e6c-38859fca2df8)
 
 ## 4
 > Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi dan suplai meme terbaru tersebut mengarah ke Tanjungkulai dan domain yang ingin digunakan adalah rujapala.xxxx.com dengan alias www.rujapala.xxxx.com.
