@@ -87,25 +87,25 @@ iface eth0 inet static
 ```
 auto eth0
 iface eth0 inet static
-    address 192.239.3.2
+    address 192.239.2.5
     netmask 255.255.255.0
-    gateway 192.239.3.1
+    gateway 192.239.2.1
 ```
 * Tanjungkulai
 ```
 auto eth0
 iface eth0 inet static
-    address 192.239.3.3
+    address 192.239.2.6
     netmask 255.255.255.0
-    gateway 192.239.3.1
+    gateway 192.239.2.1
 ```
 * Bedahulu
 ```
 auto eth0
 iface eth0 inet static
-    address 192.239.3.4
+    address 192.239.2.7
     netmask 255.255.255.0
-    gateway 192.239.3.1
+    gateway 192.239.2.1
 ```
 
 
