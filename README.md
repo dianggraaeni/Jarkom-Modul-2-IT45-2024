@@ -149,7 +149,7 @@ Setelah itu, restart seluruh node dan memastikan untuk melakukan tes koneksi (PI
 ## 2
 > Karena para pasukan membutuhkan koordinasi untuk melancarkan serangannya, maka buatlah sebuah domain yang mengarah ke Solok dengan alamat sudarsana.xxxx.com dengan alias www.sudarsana.xxxx.com, dimana xxxx merupakan kode kelompok. Contoh: sudarsana.it01.com.
 
-Buat file baru dengan misa namanya `soal2` menggunakan command berikut:
+Buat file baru dengan misal namanya `soal2` menggunakan command berikut:
 ```
 nano soal2
 ```
