@@ -280,6 +280,58 @@ ping pasopati.it45.com
 ## 4
 > Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi dan suplai meme terbaru tersebut mengarah ke Tanjungkulai dan domain yang ingin digunakan adalah rujapala.xxxx.com dengan alias www.rujapala.xxxx.com.
 
+Buat file baru dengan misal namanya `soal4` menggunakan command berikut:
+```
+nano soal4
+```
+
+Kemudian, masukkan skrip berikut ke dalam file tersebut:
+
+```
+#!/bin/bash
+
+echo 'zone "rujapala.it45.com" {
+	type master;
+	file "/etc/bind/jarkom/rujapala.it45.com";
+};' > /etc/bind/named.conf.local
+
+mkdir -p /etc/bind/jarkom
+
+cp /etc/bind/db.local /etc/bind/jarkom/rujapala.it45.com
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     rujapala.it45.com. rujapala.it45.com. (
+                        2024100301      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      rujapala.it45.com.
+@       IN      A       192.239.2.6     ; IP Tanjungkulai
+www     IN      CNAME   rujapala.it45.com.' > /etc/bind/jarkom/rujapala.it45.com
+
+service bind9 restart
+
+```
+
+Simpan dan keluar dari editor. Selanjutnya, ubah file `soal4` menjadi executable dengan menjalankan:
+```
+chmod +x ./soal4
+```
+
+Terakhir, coba lakukan tes PING ke domain tersebut dari node Sriwijaya dengan command:
+```
+ping rujapala.it45.com
+```
+
+### Result
+![image](https://github.com/user-attachments/assets/b69ff532-afcf-4ffc-a4fc-135a8979da61)
+
 ## 5
 > Pastikan domain-domain tersebut dapat diakses oleh seluruh komputer (client) yang berada di Nusantara.
 
