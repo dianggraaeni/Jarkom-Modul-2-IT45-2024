@@ -149,6 +149,73 @@ Setelah itu, restart seluruh node dan memastikan untuk melakukan tes koneksi (PI
 ## 2
 > Karena para pasukan membutuhkan koordinasi untuk melancarkan serangannya, maka buatlah sebuah domain yang mengarah ke Solok dengan alamat sudarsana.xxxx.com dengan alias www.sudarsana.xxxx.com, dimana xxxx merupakan kode kelompok. Contoh: sudarsana.it01.com.
 
+Buat file baru dengan misa namanya `soal2` menggunakan command berikut:
+```
+nano soal2
+```
+
+Kemudian, masukkan skrip berikut ke dalam file tersebut:
+
+```
+#!/bin/bash
+
+# Konfigurasi zona DNS di named.conf.local
+echo 'zone "sudarsana.it45.com" {
+    type master;
+    file "/etc/bind/jarkom/sudarsana.it45.com";
+};' > /etc/bind/named.conf.local
+
+# Membuat direktori jika belum ada
+mkdir -p /etc/bind/jarkom
+
+# Menyalin template file db.local ke file zona baru
+cp /etc/bind/db.local /etc/bind/jarkom/sudarsana.it45.com
+
+# Menulis konfigurasi zona DNS
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     root.sudarsana.it45.com. admin.sudarsana.it45.com. (
+                        2024100301      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      sudarsana.it45.com.
+@       IN      A       192.239.2.2     ; IP Solok
+www     IN      CNAME   sudarsana.it45.com.' > /etc/bind/jarkom/sudarsana.it45.com
+
+# Restart service BIND
+sudo service bind9 restart
+```
+
+Setelah itu, jika diperlukan restart layanan BIND dengan command:
+```
+service bind9 restart
+```
+
+Apabila BIND belum terinstall, lakukan instalasi dengan command:
+```
+apt install bind9 bind9utils bind9-doc -y
+```
+
+Simpan dan keluar dari editor. Selanjutnya, ubah file `soal2` menjadi executable dengan menjalankan:
+```
+chmod +x ./soal2
+```
+
+Terakhir, coba lakukan tes PING ke domain tersebut dari node Sriwijaya dengan command:
+```
+ping sudarsana.it45.com
+```
+
+### Result
+![image](https://github.com/user-attachments/assets/bd5a21a0-947c-4417-962c-8cc85be18550)
+
+
 ## 3
 > Para pasukan juga perlu mengetahui mana titik yang akan diserang, sehingga dibutuhkan domain lain yaitu pasopati.xxxx.com dengan alias www.pasopati.xxxx.com yang mengarah ke Kotalingga.
 
