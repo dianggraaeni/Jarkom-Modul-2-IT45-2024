@@ -444,6 +444,92 @@ sudo service bind9 restart
 ## 9
 > Karena terjadi serangan DDOS oleh shikanoko nokonoko koshitantan (NUN), sehingga sistem komunikasinya terhalang. Untuk melindungi warga, kita diperlukan untuk membuat sistem peringatan dari siren man oleh Frekuensi Freak dan memasukkannya ke subdomain panah.pasopati.xxxx.com dalam folder panah dan pastikan dapat diakses secara mudah dengan menambahkan alias www.panah.pasopati.xxxx.com dan mendelegasikan subdomain tersebut ke Majapahit dengan alamat IP menuju radar di Kotalingga.
 
+### Sriwijaya
+```
+#!/bin/bash
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     pasopati.it45.com. root.pasopati.it45.com. (
+                        2024100318      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      pasopati.it45.com.
+@       IN      A       192.239.2.4     ; IP Kotalingga
+www     IN      CNAME   pasopati.it45.com.
+panah   IN      A       192.239.1.2     ; Delegasikan ke Majapahit
+ns1     IN      A       192.239.1.2     ; Delegasikan ke Majapahit
+panah   IN      NS      ns1' > /etc/bind/jarkom/pasopati.it45.com
+
+echo '
+options {
+        directory "/var/cache/bind";
+
+        //dnssec-validation auto;
+        allow-query{any;};
+
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};' > /etc/bind/named.conf.options
+
+service bind9 restart
+```
+
+### Majapahit
+```
+#!/bin/bash
+
+echo '
+options {
+        directory "/var/cache/bind";
+
+        //dnssec-validation auto;
+        allow-query{any;};
+
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};' > /etc/bind/named.conf.options
+
+echo 'zone "panah.pasopati.it45.com" {
+	type master;
+	file "/etc/bind/panah/panah.pasopati.it45.com";
+};' >> /etc/bind/named.conf.local
+
+mkdir /etc/bind/panah
+
+cp /etc/bind/db.local /etc/bind/panah/panah.pasopati.it45.com
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     panah.pasopati.it45.com. root.panah.pasopati.it45.com. (
+                        2024100318      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      panah.pasopati.it45.com.
+@       IN      A       192.239.1.2     ; IP Majapahit
+www.panah     IN      CNAME   panah.pasopati.it45.com.' > /etc/bind/panah/panah.pasopati.it45.com
+
+service bind9 restart
+```
+
+### Result
+![image](https://github.com/user-attachments/assets/5cf15204-6c7e-4d04-926d-1e05cfbc47ea)
+![image](https://github.com/user-attachments/assets/1a0c718f-543e-41aa-b1c3-49ce9f2b9cff)
+![image](https://github.com/user-attachments/assets/a48568f6-ed81-4227-a21f-5a26d25035c0)
+![image](https://github.com/user-attachments/assets/f410bce8-7cd6-4a6e-bd42-ce7c9611dbb3)
+
 ## 10
 > Markas juga meminta catatan kapan saja meme brain rot akan dijatuhkan, maka buatlah subdomain baru di subdomain panah yaitu log.panah.pasopati.xxxx.com serta aliasnya www.log.panah.pasopati.xxxx.com yang juga mengarah ke Kotalingga.
 
