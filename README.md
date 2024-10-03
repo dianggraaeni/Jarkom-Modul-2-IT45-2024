@@ -558,6 +558,25 @@ service bind9 restart
 
 ## 11
 > Setelah pertempuran mereda, warga IT dapat kembali mengakses jaringan luar dan menikmati meme brainrot terbaru, tetapi hanya warga Majapahit saja yang dapat mengakses jaringan luar secara langsung. Buatlah konfigurasi agar warga IT yang berada diluar Majapahit dapat mengakses jaringan luar melalui DNS Server Majapahit.
+```
+echo '
+options {
+        directory "/var/cache/bind";
+
+        forwarders {
+                192.239.1.1; 
+        };
+
+        allow-query{any;};
+
+        auth-nxdomain no;  
+        listen-on-v6 { any; };
+};
+' > /etc/bind/named.conf.options
+```
+service bind9 restart
+![image](https://github.com/user-attachments/assets/c07f7dfb-f3d7-4c96-9bfb-3df4b8cb1b21)
+![image](https://github.com/user-attachments/assets/c93992cb-2057-4203-9ef3-4bae305ae3fc)
 
 ## 12
 > Karena pusat ingin sebuah laman web yang ingin digunakan untuk memantau kondisi kota lainnya maka deploy laman web ini (cek resource yg lb) pada Kotalingga menggunakan apache.
