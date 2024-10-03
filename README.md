@@ -149,13 +149,22 @@ Setelah itu, restart seluruh node dan memastikan untuk melakukan tes koneksi (PI
 ## 2
 > Karena para pasukan membutuhkan koordinasi untuk melancarkan serangannya, maka buatlah sebuah domain yang mengarah ke Solok dengan alamat sudarsana.xxxx.com dengan alias www.sudarsana.xxxx.com, dimana xxxx merupakan kode kelompok. Contoh: sudarsana.it01.com.
 
-Buat file baru dengan misal namanya `soal2` menggunakan command berikut:
+Simpan nameserver milik Nusantara dan Sriwijaya menggunakan command berikut:
 ```
-nano soal2
+nano /etc/resolv.conf
+```
+Isinya menjadi seperti ini
+```
+nameserver 192.168.122.1
+nameserver 192.239.2.5
+```
+
+Jalankan command berikut untuk menambahkan script kedalam /root/.bashrc
+```
+nano /root/.bashrc
 ```
 
 Kemudian, masukkan skrip berikut ke dalam file tersebut:
-
 ```
 #!/bin/bash
 
@@ -202,11 +211,6 @@ Apabila BIND belum terinstall, lakukan instalasi dengan command:
 apt install bind9 bind9utils bind9-doc -y
 ```
 
-Simpan dan keluar dari editor. Selanjutnya, ubah file `soal2` menjadi executable dengan menjalankan:
-```
-chmod +x ./soal2
-```
-
 Terakhir, tes PING ke domain tersebut dari node Sriwijaya dengan command:
 ```
 ping sudarsana.it45.com
@@ -218,9 +222,9 @@ ping sudarsana.it45.com
 ## 3
 > Para pasukan juga perlu mengetahui mana titik yang akan diserang, sehingga dibutuhkan domain lain yaitu pasopati.xxxx.com dengan alias www.pasopati.xxxx.com yang mengarah ke Kotalingga.
 
-Buat file baru dengan misal namanya `soal3` menggunakan command berikut:
+Jalankan command berikut untuk menambahkan script kedalam /root/.bashrc
 ```
-nano soal3
+nano /root/.bashrc
 ```
 
 Kemudian, masukkan skrip berikut ke dalam file tersebut:
@@ -264,11 +268,6 @@ named-checkconf
 service bind9 restart
 ```
 
-Simpan dan keluar dari editor. Selanjutnya, ubah file `soal3` menjadi executable dengan menjalankan:
-```
-chmod +x ./soal3
-```
-
 Terakhir, coba lakukan tes PING ke domain tersebut dari node Sriwijaya dengan command:
 ```
 ping pasopati.it45.com
@@ -280,9 +279,9 @@ ping pasopati.it45.com
 ## 4
 > Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi dan suplai meme terbaru tersebut mengarah ke Tanjungkulai dan domain yang ingin digunakan adalah rujapala.xxxx.com dengan alias www.rujapala.xxxx.com.
 
-Buat file baru dengan misal namanya `soal4` menggunakan command berikut:
+Jalankan command berikut untuk menambahkan script kedalam /root/.bashrc
 ```
-nano soal4
+nano /root/.bashrc
 ```
 
 Kemudian, masukkan skrip berikut ke dalam file tersebut:
@@ -317,11 +316,6 @@ www     IN      CNAME   rujapala.it45.com.' > /etc/bind/jarkom/rujapala.it45.com
 
 service bind9 restart
 
-```
-
-Simpan dan keluar dari editor. Selanjutnya, ubah file `soal4` menjadi executable dengan menjalankan:
-```
-chmod +x ./soal4
 ```
 
 Terakhir, coba lakukan tes PING ke domain tersebut dari node Sriwijaya dengan command:
