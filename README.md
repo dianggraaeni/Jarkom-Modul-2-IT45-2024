@@ -573,8 +573,9 @@ options {
         listen-on-v6 { any; };
 };
 ' > /etc/bind/named.conf.options
-```
+
 service bind9 restart
+```
 ![image](https://github.com/user-attachments/assets/c07f7dfb-f3d7-4c96-9bfb-3df4b8cb1b21)
 ![image](https://github.com/user-attachments/assets/c93992cb-2057-4203-9ef3-4bae305ae3fc)
 
