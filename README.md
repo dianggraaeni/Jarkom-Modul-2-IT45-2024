@@ -358,6 +358,37 @@ ping -c 2 rujapala.it45.com
 ## 6
 > Beberapa daerah memiliki keterbatasan yang menyebabkan hanya dapat mengakses domain secara langsung melalui alamat IP domain tersebut. Karena daerah tersebut tidak diketahui secara spesifik, pastikan semua komputer (client) dapat mengakses domain pasopati.xxxx.com melalui alamat IP Kotalingga (Notes: menggunakan pointer record).
 
+```
+apt-get update
+apt-get install bind9 dnsutils -y
+
+echo 'zone "2.239.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/jarkom/2.239.192.in-addr.arpa";
+};' >> /etc/bind/named.conf.local
+
+cp /etc/bind/db.local /etc/bind/jarkom/2.239.192.in-addr.arpa
+
+echo '
+;
+; BIND reverse data file for 192.239.2.12
+;
+$TTL    604800
+@       IN      SOA     pasopati.it23.com. pasopati.it23.com. (
+                        2023101001      ; Serial
+                        604800         ; Refresh
+                        86400         ; Retry
+                        2419200         ; Expire
+                        604800 )       ; Negative Cache TTL
+;
+2.239.192.in-addr.arpa   IN      NS      pasopati.it45.com.
+12                      IN      PTR     pasopati.it45.com.' > /etc/bind/jarkom/2.239.192.in-addr.arpa
+
+service bind9 restart
+
+dig -x 192.239.2.12
+```
+
 ## 7
 > Akhir-akhir ini seringkali terjadi serangan brainrot ke DNS Server Utama, sebagai tindakan antisipasi kamu diperintahkan untuk membuat DNS Slave di Majapahit untuk semua domain yang sudah dibuat sebelumnya yang mengarah ke Sriwijaya.
 
