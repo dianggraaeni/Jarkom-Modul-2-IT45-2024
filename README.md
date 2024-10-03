@@ -394,6 +394,7 @@ dig -x 192.239.2.12
 
 ## 8
 > Kamu juga diperintahkan untuk membuat subdomain khusus melacak kekuatan tersembunyi di Ohio dengan subdomain cakra.sudarsana.xxxx.com yang mengarah ke Bedahulu.
+
 Jalankan command berikut untuk menambahkan script kedalam /root/.bashrc
 ```
 nano /root/.bashrc
