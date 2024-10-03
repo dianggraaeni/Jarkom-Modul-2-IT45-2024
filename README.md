@@ -532,6 +532,29 @@ service bind9 restart
 
 ## 10
 > Markas juga meminta catatan kapan saja meme brain rot akan dijatuhkan, maka buatlah subdomain baru di subdomain panah yaitu log.panah.pasopati.xxxx.com serta aliasnya www.log.panah.pasopati.xxxx.com yang juga mengarah ke Kotalingga.
+```
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     panah.pasopati.it45.com. root.panah.pasopati.it45.com. (
+												2024100323		; Serial
+												604800			; Refresh
+												86400			; Retry
+												2419200         ; Expire
+												604800 )		; Negative Cache TTL
+;
+@       IN      NS      panah.pasopati.it45.com.
+@       IN      A       192.239.2.4
+www     IN      CNAME   panah.pasopati.it45.com.
+log     IN      A       192.239.2.4
+www.log IN      CNAME   log.panah.pasopati.it45.com.
+
+service bind9 restart
+```
+![image](https://github.com/user-attachments/assets/369f2cbd-d297-46a8-a135-9e9dec0f5b41)
+![image](https://github.com/user-attachments/assets/b5581616-0a9f-4a95-8537-3511611208cc)
 
 ## 11
 > Setelah pertempuran mereda, warga IT dapat kembali mengakses jaringan luar dan menikmati meme brainrot terbaru, tetapi hanya warga Majapahit saja yang dapat mengakses jaringan luar secara langsung. Buatlah konfigurasi agar warga IT yang berada diluar Majapahit dapat mengakses jaringan luar melalui DNS Server Majapahit.
