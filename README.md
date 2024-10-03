@@ -166,21 +166,15 @@ nano /root/.bashrc
 
 Kemudian, masukkan skrip berikut ke dalam file tersebut:
 ```
-#!/bin/bash
-
-# Konfigurasi zona DNS di named.conf.local
 echo 'zone "sudarsana.it45.com" {
     type master;
     file "/etc/bind/jarkom/sudarsana.it45.com";
 };' > /etc/bind/named.conf.local
 
-# Membuat direktori jika belum ada
 mkdir -p /etc/bind/jarkom
 
-# Menyalin template file db.local ke file zona baru
 cp /etc/bind/db.local /etc/bind/jarkom/sudarsana.it45.com
 
-# Menulis konfigurasi zona DNS
 echo '
 ;
 ; BIND data file for local loopback interface
@@ -230,18 +224,13 @@ nano /root/.bashrc
 Kemudian, masukkan skrip berikut ke dalam file tersebut:
 
 ```
-#!/bin/bash
-
-# Menambahkan zona ke konfigurasi BIND
 echo 'zone "pasopati.it45.com" {
 	type master;
 	file "/etc/bind/jarkom/pasopati.it45.com";
 };' > /etc/bind/named.conf.local
 
-# Membuat direktori jika belum ada
 mkdir -p /etc/bind/jarkom
 
-# Template file DNS
 cp /etc/bind/db.local /etc/bind/jarkom/pasopati.it45.com
 
 # Mengatur file zona
@@ -287,8 +276,6 @@ nano /root/.bashrc
 Kemudian, masukkan skrip berikut ke dalam file tersebut:
 
 ```
-#!/bin/bash
-
 echo 'zone "rujapala.it45.com" {
 	type master;
 	file "/etc/bind/jarkom/rujapala.it45.com";
@@ -401,21 +388,15 @@ nano /root/.bashrc
 ```
 Kemudian, masukkan skrip berikut ke dalam file tersebut:
 ```
-#!/bin/bash
-
-# Konfigurasi zona DNS di named.conf.local
 echo 'zone "sudarsana.it45.com" {
     type master;
     file "/etc/bind/jarkom/sudarsana.it45.com";
 };' > /etc/bind/named.conf.local
 
-# Membuat direktori jika belum ada
 mkdir -p /etc/bind/jarkom
 
-# Menyalin template file db.local ke file zona baru
 cp /etc/bind/db.local /etc/bind/jarkom/sudarsana.it45.com
 
-# Menulis konfigurasi zona DNS
 echo '
 ;
 ; BIND data file for local loopback interface
@@ -446,8 +427,6 @@ sudo service bind9 restart
 
 ### Sriwijaya
 ```
-#!/bin/bash
-
 echo '
 ;
 ; BIND data file for local loopback interface
@@ -483,8 +462,6 @@ service bind9 restart
 
 ### Majapahit
 ```
-#!/bin/bash
-
 echo '
 options {
         directory "/var/cache/bind";
