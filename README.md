@@ -361,7 +361,7 @@ echo '
 ; BIND reverse data file for 192.239.2.12
 ;
 $TTL    604800
-@       IN      SOA     pasopati.it23.com. pasopati.it23.com. (
+@       IN      SOA     pasopati.it45.com. pasopati.it45.com. (
                         2023101001      ; Serial
                         604800         ; Refresh
                         86400         ; Retry
