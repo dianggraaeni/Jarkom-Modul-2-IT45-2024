@@ -394,6 +394,51 @@ dig -x 192.239.2.12
 
 ## 8
 > Kamu juga diperintahkan untuk membuat subdomain khusus melacak kekuatan tersembunyi di Ohio dengan subdomain cakra.sudarsana.xxxx.com yang mengarah ke Bedahulu.
+Jalankan command berikut untuk menambahkan script kedalam /root/.bashrc
+```
+nano /root/.bashrc
+```
+Kemudian, masukkan skrip berikut ke dalam file tersebut:
+```
+#!/bin/bash
+
+# Konfigurasi zona DNS di named.conf.local
+echo 'zone "sudarsana.it45.com" {
+    type master;
+    file "/etc/bind/jarkom/sudarsana.it45.com";
+};' > /etc/bind/named.conf.local
+
+# Membuat direktori jika belum ada
+mkdir -p /etc/bind/jarkom
+
+# Menyalin template file db.local ke file zona baru
+cp /etc/bind/db.local /etc/bind/jarkom/sudarsana.it45.com
+
+# Menulis konfigurasi zona DNS
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     root.sudarsana.it45.com. admin.sudarsana.it45.com. (
+                        2024100301      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      sudarsana.it45.com.
+@       IN      A       192.239.2.2     ; IP Solok
+www     IN      CNAME   sudarsana.it45.com.
+cakra       IN      A       192.239.2.7     ; IP Bedahulu
+www     IN      CNAME   sudarsana.it45.com.' > /etc/bind/jarkom/sudarsana.it45.com
+
+# Restart service BIND
+sudo service bind9 restart
+```
+
+### Result
+![image](https://github.com/user-attachments/assets/3bae65b1-9b99-4f11-b775-2b7ec7b58a45)
 
 ## 9
 > Karena terjadi serangan DDOS oleh shikanoko nokonoko koshitantan (NUN), sehingga sistem komunikasinya terhalang. Untuk melindungi warga, kita diperlukan untuk membuat sistem peringatan dari siren man oleh Frekuensi Freak dan memasukkannya ke subdomain panah.pasopati.xxxx.com dalam folder panah dan pastikan dapat diakses secara mudah dengan menambahkan alias www.panah.pasopati.xxxx.com dan mendelegasikan subdomain tersebut ke Majapahit dengan alamat IP menuju radar di Kotalingga.
